@@ -1,4 +1,3 @@
 #!/usr/bin/mysql
-#This script lists all databases of your MySQL server
-
+-- This script lists all databases of my MySQL server
 SHOW DATABASES;
