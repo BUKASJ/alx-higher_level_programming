@@ -2,14 +2,10 @@
 
 // class Square that defines a square and inherits from Square of 5-square.js
 
-const SquareParent = require('./5-square');
+const SquareBase = require('./5-square');
 
-class Square extends SquareParent {
-  constructor(size) {
-    super(size);
-  }
-
-  charPrint(c) {
+class Square extends SquareBase {
+  charPrint (c) {
     if (c === undefined) {
       c = 'X';
     }
