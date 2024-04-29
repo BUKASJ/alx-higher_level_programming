@@ -5,42 +5,27 @@ table of hbtn_0e_0_usa where name matches the argument
 """
 
 import MySQLdb
-
-
-def main():
-
-    mysql_username = input("Enter MySQL username: ")
-    mysql_password = input("Enter MySQL password: ")
-    database_name = input("Enter database name: ")
-
-    try:
-        conn = MySQLdb.connect(
-            host="localhost",
-            port=3306,
-            user=mysql_username,
-            passwd=mysql_password,
-            db=database_name,
-        )
-
-        cur = conn.cursor()
-
-        cur.execute("SELECT * FROM states ORDER BY id ASC")
-
-        query_rows = cur.fetchall()
-
-        for row in query_rows:
-            print(row)
-
-    except MySQLdb.Error as err:
-        print(f"Error: {err}")
-
-    finally:
-
-        if cur:
-            cur.close()
-            if conn:
-                conn.close()
+from sys import argv
 
 
 if __name__ == "__main__":
-    main()
+    db = MySQLdb.connect(
+        host="localhost",
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3],
+        port=3306
+    )
+
+    cur = db.cursor()
+
+    cur.execute("SELECT * FROM states WHERE name LIKE BINARY %s \
+                 ORDER BY id ASC", (sys.argv[4],))
+
+    rows = cur.fetchall()
+
+    for row in rows:
+        print(row)
+
+    cur.close()
+    db.close()
