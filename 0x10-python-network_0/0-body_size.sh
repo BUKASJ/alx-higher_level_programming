@@ -1,5 +1,4 @@
 #!/bin/bash
-#script that takes in a URL, sends a request to that URL,
-#and displays the size of the body of the response
+# Get response size from URL using curl
 
-curl -sI $1 | awk '/Content-Length/ {print "Size of the response body: " $2 " bytes"; exit}'
+curl -s "$1" | grep -iE '^Content-Length: ([0-9]+)' | awk '{print $2}'
