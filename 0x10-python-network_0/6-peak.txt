@@ -1,1 +1,1 @@
-O(log(n))
+echo "O(log(n))"
